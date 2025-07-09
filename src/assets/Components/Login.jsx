@@ -10,7 +10,6 @@ function Login({
   handleSendMessage,
   messageEndRef,
   formatTime,
-  isOnline,
 }) {
   const getCurrentTime = () => {
     const now = new Date();
@@ -34,9 +33,6 @@ function Login({
             />
             <div>
               <div>{selectedUser === "ABC" ? "XYZ" : "ABC"}</div>
-              <div className="text-xs text-green-300">
-                {isOnline ? "Online" : "Offline"}
-              </div>
             </div>
           </div>
           <div className="text-sm text-gray-300">{getCurrentTime()}</div>
