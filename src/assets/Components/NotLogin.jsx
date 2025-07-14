@@ -1,10 +1,10 @@
+// src/Components/NotLogin.jsx
 import React from "react";
 
 function NotLogin({ selectedUser, setSelectedUser, handlelogin }) {
   return (
     <div className="w-full flex justify-center items-center px-3 mt-24">
-      <div className="w-full max-w-[480px] p-10 rounded-3xl bg-gradient-to-br from-[#2c2c38] via-[#1f1f2e] to-[#16161e] border border-white/20 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] backdrop-blur-lg text-white flex flex-col items-center gap-8">
-
+      <div className="w-full max-w-[480px] p-10 rounded-3xl bg-gradient-to-br from-[#2c2c38] via-[#1f1f2e] to-[#16161e] border border-white/20 shadow-lg backdrop-blur-lg text-white flex flex-col items-center gap-8">
         <h1 className="text-3xl font-extrabold text-indigo-400">
           Welcome to <span className="text-white">AI Chat App</span>
         </h1>
@@ -30,4 +30,3 @@ function NotLogin({ selectedUser, setSelectedUser, handlelogin }) {
 }
 
 export default NotLogin;
-  

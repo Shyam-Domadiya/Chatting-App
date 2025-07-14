@@ -1,5 +1,7 @@
-import React from "react";
+// src/Components/Login.jsx
+import React, { useState } from "react";
 import Input from "./Input";
+import AIChatPopup from "./AIChatPopup";
 
 function Login({
   msg,
@@ -11,6 +13,8 @@ function Login({
   messageEndRef,
   formatTime,
 }) {
+  const [showAIPopup, setShowAIPopup] = useState(false);
+
   const getCurrentTime = () => {
     const now = new Date();
     return now.toLocaleTimeString([], {
@@ -65,12 +69,25 @@ function Login({
           <div ref={messageEndRef} />
         </div>
 
-        {/* Input */}
+        {/* AI Chat Button */}
+        <div className="px-5 pb-2">
+          <button
+            onClick={() => setShowAIPopup(true)}
+            className="w-full py-2 bg-purple-700 hover:bg-purple-800 text-white rounded-full font-semibold mb-2"
+          >
+            Chat with Gemini 🤖
+          </button>
+        </div>
+
+        {/* Input Field */}
         <Input
           msgText={msgText}
           setMsgText={setMsgText}
           handleSendMessage={handleSendMessage}
         />
+
+        {/* AI Chat Popup */}
+        {showAIPopup && <AIChatPopup onClose={() => setShowAIPopup(false)} />}
       </div>
     </div>
   );

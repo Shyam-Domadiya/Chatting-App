@@ -15,9 +15,10 @@ const App = () => {
   const messageEndRef = useRef(null);
 
   const tokenA =
-    "04AAAAAGhzN9AADDRmdRRsNkk1LxLl4gCt4q9sbnvi1c4PFkdxr00v4dAiBEtx6MtUPrn0vegDZ+rWW8JJzd0U6/Dp0R19Zy1pOvVkDTIKoQuhOJPqGwtwVn/M3HVZq7KFUSwIEl08Z+R2eHLllMnWEBX61nRCHZSDia1lR4Q/5yd1ORfUTdKydMcj5mbk13xlvQPNL2kAXkGKm+BQnr/CAHacelzTz3cBcb80kNwrau1bLoFOqB28cfCVGgL5kZtDhuB3iYwB";
+    "04AAAAAGh2Qp4ADNiEAwpuarNRW/33hACuKzqBMb5ndu7DYLV7xEb52SoheYv69oInmfNDA+SsF6qTWRQHUGitFwhc/EZZXhtq59lD2K9TMx+cdxhJRPKX/pJOjTkUiyANne2Us/WS27JfgKD4tx+yaU8YXd/0O6uMzso3lqEfquGO3TbjgN8NW0X8ezvCgOlGtJ4Fqd/yyPVApOpmUrg41oO/W88eHxF5DLtjRCD04rknFTRbcrCNPZBQb2GIVMCoJpLichcvAQ==";
+
   const tokenB =
-    "04AAAAAGhzN/IADFNWiKsWmHar6178mwCtGZZvzYxrdv0z+kNWu6LtK+DfFteKjNpLzPaVx0/9UcZMz7RJ6g17MvKCCJrn5HelYOmZ1Z0zHQt22SVuLmU1w1dJ9xo6RUkRYcVfG0mcHPJ33qGQPQgs1w7UcfRihBYtztS6l7IG3c/SXX79vrKQT8U6nTY18MzjMYmUlOpto4kF1BmB8xdPqnjRz9//e/9SL5irQPPXkOC7AMtU/7m76Gulb+5OfZBnGmdf1XIB";
+    "04AAAAAGh2QrYADAokNT2c989VuEYmtQCuGP2AbgjZtB27V+O8y5tPh0PdcCd9nZr/RyirQyXJBozNPfbTupKMAFPyP5dk7x5BIAOEuqfwfEZNRdfpEFWNqBmhevHpkfm8MHPq3XoEHoFeF3Vxx6wEwrtYyiSwfdCThnlCYYvOhS48PRSKgJ77ek7zWF8rFGtUoExaqFiHAb7/WeBJKy6s4K1cWQBBimJ85gcQiz+IAV69XMKisK+QKTBTCwS7l6DjAII8x/AYAQ==";
 
   useEffect(() => {
     const instance = ZIM.create(2053391239);
@@ -28,7 +29,7 @@ const App = () => {
     });
 
     instance.on("connectionStateChanged", (zim, { state }) => {
-      console.log("ZIM connection state changed:", state);
+      console.log("Connection state:", state);
       setIsOnline(state === "CONNECTED");
     });
 
@@ -71,7 +72,7 @@ const App = () => {
           setIsloggedin(true);
         })
         .catch((err) => {
-          console.log("Login failed", err);
+          console.log("Login failed:", err);
         });
     }
   };
@@ -79,10 +80,7 @@ const App = () => {
   const handleSendMessage = () => {
     if (!isloggedin || msgText.trim() === "") return;
 
-    const toConversationID = selectedUser === "ABC" ? "XYZ" : "ABC";
-    const conversationType = 0;
-    const config = { priority: 1 };
-
+    const toUser = selectedUser === "ABC" ? "XYZ" : "ABC";
     const messageTextObj = {
       type: 1,
       message: msgText,
@@ -90,7 +88,7 @@ const App = () => {
     };
 
     zimInstance
-      .sendMessage(messageTextObj, toConversationID, conversationType, config)
+      .sendMessage(messageTextObj, toUser, 0, { priority: 1 })
       .then(({ message }) => {
         setMsg((prev) => [...prev, message]);
       })
